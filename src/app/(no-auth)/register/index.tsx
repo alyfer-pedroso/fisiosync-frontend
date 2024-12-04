@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { View, Text } from "react-native";
 
 import { Page } from "@/components/template";
 import { TopButton } from "@/components/auth";
@@ -10,6 +10,15 @@ export default function Register() {
         <TopButton text="Entrar" href="/(no-auth)/login" />
         <TopButton text="Registrar-se" href="/(no-auth)/register" selected={true} />
       </View>
+
+      <view>
+        <text className="text-[2.5rem]">
+          Bem-vindo!
+        </text>
+      </view>
+
+
     </Page>
   );
 }
+
