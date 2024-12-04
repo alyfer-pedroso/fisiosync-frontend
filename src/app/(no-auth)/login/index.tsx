@@ -9,14 +9,14 @@ export default function Login() {
         <TopButton text="Entrar" href="/(no-auth)/login" selected={true} />
         <TopButton text="Registrar-se" href="/(no-auth)/register" />
       </View>
+      
+    <View className="flex-1 items-center justify-center gap-3">
 
     <View>
-      <Text className="text-[1.5rem] text-center font-bold top-32">
+      <Text className="text-[1.5rem] text-center font-bold mb-6">
         Bem-vindo ao FisioSync
       </Text>
     </View>
-
-    <View className="flex-1 items-center justify-center gap-3">
 
     <Input placeholder="Email ou número de telefone" className="placeholder:text-gray-500 font-inter-regular"/>
 
@@ -32,7 +32,7 @@ export default function Login() {
 
       <Button text="Continuar com Google" className="bg-[#507CFF]"/>
 
-        <Text className="mt-5 text-gray-500">
+        <Text className="mt-7 text-gray-500">
           Esqueceu a senha?
         </Text>
 
