@@ -1,6 +1,7 @@
 import { Button, Input, Page } from "@/components/template";
 import { TopButton } from "@/components/auth";
 import { View, Text } from "react-native";
+import { Link } from "expo-router";
 
 export default function Login() {
   return (
@@ -32,9 +33,9 @@ export default function Login() {
 
       <Button text="Continuar com Google" className="bg-[#507CFF]"/>
 
-        <Text className="mt-7 text-gray-500">
+        <Link href={"/(no-auth)/forget"} className="mt-7 text-gray-500">
           Esqueceu a senha?
-        </Text>
+        </Link>
 
         <View className="w-56 border-t border-gray-400"/>
 
