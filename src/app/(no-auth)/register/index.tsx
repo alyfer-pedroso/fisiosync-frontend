@@ -43,7 +43,7 @@ export default function Register() {
       <Checkbox/>
         <Text className="pl-3 w-full max-w-[225px] font-inter-Bold text-[13px] text-gray-400">
           Aceito receber Emails e SMS de novidades do{" "} 
-          <Text className="text-[#1F4BFC]">Fisioterapia</Text>
+          <Text className="text-[#1F4BFC]">FisioSync</Text>
         </Text>
       </View>
     </View>
