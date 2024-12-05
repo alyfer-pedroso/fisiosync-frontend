@@ -1,51 +1,33 @@
 import React from 'react'; 
-import { View, Text, TextInput, Button } from 'react-native'; 
-import { Page } from "@/components/template";
+import { View , Text } from 'react-native'; 
+import { Page , Input , Button } from "@/components/template";
 
 export default function Forget() {
   return (
     <Page>
       <View className="flex-1 justify-center px-6 sm:px-10 py-6">
         
-        <View className="top-1 left-0 right-0 pb-5">
-          <Text className="text-black-500 text-center text-5xl font-bold">
-            Recuperar senha
-          </Text>
+        <View className="top-1 left-0 right-0 pb-5 gap-3">
+          <Text className="text-center text-5xl font-bold font-inter-bold">Recuperar senha</Text>
+          <View className="mt-2 mx-auto w-96 h-1 bg-black rounded-full" ></View>
+          <Text className="text-center text-2xl font-bold font-inter-bold">Insira seus dados:</Text>
         </View>
 
-        <View className="mt-20 sm:mt-24 flex items-center">
-          <TextInput
-            className="border-0 bg-gray-200 rounded-xl p-5 mb-4 text-base text-lg w-80" 
-            placeholder="E-mail" 
-          />
+        <View className="mt-20 sm:mt-24 flex items-center gap-5">
+          <Input placeholder="E-mail" className="placeholder:text-gray-500 font-inter-regular"/>
 
-          <TextInput
-            className="border-0 bg-gray-200 rounded-xl p-5 mb-4 text-base text-lg w-80"
-            placeholder="Código"
-          />
+          <Input placeholder="Código" className="placeholder:text-gray-500 font-inter-regular"/>
 
-          <TextInput
-            className="border-0 bg-gray-200 rounded-xl p-5 mb-4 text-base text-lg w-80"
-            placeholder="Senha"
-          />
+          <Input placeholder="Digite sua nova senha" className="placeholder:text-gray-500 font-inter-regular"/>
 
-          <TextInput
-            className="border-0 bg-gray-200 rounded-xl p-5 mb-4 text-base text-lg w-80"
-            placeholder="Confirmar sua senha"
-          />
+          <Input placeholder="Confirme sua senha" className="placeholder:text-gray-500 font-inter-regular"/>
 
-          <View className="mt-6 mb-10 rounded-xl overflow-hidden w-3/4">
-            <Button title="Mudar senha" color="blue"/>
-          </View>
+          <Button text="Mudar Senha" className="font-inter-regular" mt-4/>
         </View>
 
-        <View className="absolute bottom-0 left-0 right-0 pb-6 flex flex-row justify-between mx-3">
-          <Text className="text-blue-200 text-left text-lg font-bold">
-            Dúvidas? Fale conosco
-          </Text>
-          <Text className="text-blue-200 text-right text-lg font-bold">
-            Todos os direitos reservados
-          </Text>
+        <View className="absolute bottom-0 left-0 right-0 h-8 flex flex-row justify-between mx-3">
+          <Text className="text-blue-200 text-left text-lg font-bold">Dúvidas? Fale conosco</Text>
+          <Text className="text-blue-200 text-right text-lg font-bold">Todos os direitos reservados</Text>
         </View>
       </View>
     </Page>
