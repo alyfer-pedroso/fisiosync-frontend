@@ -34,7 +34,7 @@ export default function Forget() {
             placeholder="Confirmar sua senha"
           />
 
-          <View className="mt-6 mb-12 rounded-xl overflow-hidden w-3/4">
+          <View className="mt-6 mb-10 rounded-xl overflow-hidden w-3/4">
             <Button title="Mudar senha" color="blue"/>
           </View>
         </View>
