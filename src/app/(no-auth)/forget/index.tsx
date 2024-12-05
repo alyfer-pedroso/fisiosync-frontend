@@ -7,7 +7,7 @@ export default function Forget() {
     <Page>
       <View className="flex-1 justify-between px-6 sm:px-10 py-6">
 
-        <View className="pb-4 gap-2">
+        <View className="pb-1 pt-16 gap-1">
           <Text className="text-5xl text-center font-bold font-inter-bold">Recuperar senha</Text>
           <View className="mt-2 mx-auto w-96 h-1 bg-black rounded-full" ></View>
         </View>
@@ -27,8 +27,8 @@ export default function Forget() {
         </View>
 
         <View className="flex flex-row justify-between pb-1">
-          <Text className="flex-1 text-blue-200 text-left text-lg font-bold">Dúvidas? Fale conosco</Text>
-          <Text className="flex-1 text-blue-200 text-right text-lg font-bold">©</Text>
+          <Text className="flex-1 text-blue-200 text-left text-base font-bold">Dúvidas? Fale conosco</Text>
+          <Text className="flex-1 text-blue-200 text-right text-base font-bold">Todos os direitos reservados</Text>
         </View>
       </View>
     </Page>
