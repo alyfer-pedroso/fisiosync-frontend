@@ -2,6 +2,7 @@ import { Text } from "react-native";
 import { Page } from "@/components/template";
 import { View } from "react-native";
 import { TouchableOpacity } from "react-native";
+import { ScrollView } from "react-native";
 
 export default function Home() {
   return (
@@ -42,17 +43,21 @@ export default function Home() {
         </View>
       </View>
 
-      <View className="pb-3">
-        <View className="flex-row items-center justify-between">
+      <View className="mt-6">
+        <View className="flex-row items-center justify-between mb-3">
           <Text className="font-extrabold text-lg leading-tight">Musicas e frequencias</Text>
           <Text className="font-medium text-[#1F4BFC] max-w-[30%] trucante text-right text-xs">Veja mais</Text>
         </View>
       </View>
 
       <View className="flex-1 flex-row justify-between gap-2">
-        <View className="bg-[#EDEDED] w-32 h-52 rounded-2xl"></View>
-        <View className="bg-[#EDEDED] w-32 h-52 rounded-2xl"></View>
-        <View className="bg-[#EDEDED] w-32 h-52 rounded-2xl"></View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 8, gap: 8 }}>
+          <View className="bg-[#EDEDED] w-32 h-52 rounded-2xl"></View>
+          <View className="bg-[#EDEDED] w-32 h-52 rounded-2xl"></View>
+          <View className="bg-[#EDEDED] w-32 h-52 rounded-2xl"></View>
+          <View className="bg-[#EDEDED] w-32 h-52 rounded-2xl"></View>
+          <View className="bg-[#EDEDED] w-32 h-52 rounded-2xl"></View>
+        </ScrollView>
       </View>
     </Page>
   );
