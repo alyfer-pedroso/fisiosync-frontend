@@ -10,7 +10,8 @@ export default function Layout() {
   useEffect(() => {
     (async () => {
       handleLoading(true);
-      !(await getData("token")) && router.push("/(no-auth)/login");
+      // Descomentar padrão depois
+      //* Padrão: !(await getData("token")) && router.push("/(no-auth)/login");
       handleLoading(false);
     })();
   }, []);
