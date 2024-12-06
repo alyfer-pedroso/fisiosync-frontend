@@ -8,7 +8,7 @@ export default function Search() {
 
         <View className="pt-16 w-full flex items-center gap-5">
           <Text className="text-center text-xl font-bold">Escolha sua música favorita</Text>
-          <Text className="text-center text-sm font-light pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus placerat turpis vitae enim pretium elementum.</Text>
+          <Text className="text-center text-sm font-light pb-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus placerat turpis vitae enim pretium elementum...</Text>
 
           <Input placeholder="Pesquise sua música aqui..." className="w-full max-w-xl h-[40px] bg-gray-100 border-0 rounded-2xl px-4 text-base font-light"/>
         </View>
