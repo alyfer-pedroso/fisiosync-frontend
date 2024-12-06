@@ -12,7 +12,9 @@ export default function App() {
   useEffect(() => {
     (async () => {
       const token = await getData("token");
-      !token ? router.push("/(no-auth)/login") : router.push("/(with-auth)/(tabs-main)/home");
+      // Descomentar o padrão depois
+      //* Padrão: !token ? router.push("/(no-auth)/login") : router.push("/(with-auth)/(tabs-main)/home");
+      !token ? router.push("/(no-auth)/home") : router.push("/(with-auth)/(tabs-main)/home");
     })();
   }, []);
 
