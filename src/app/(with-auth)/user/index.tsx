@@ -57,7 +57,7 @@ export default function User() {
           {["Pop", "Rock", "Trap", "Jazz", "Clássica","R&B"].map((item, index) => (
       <View 
         key={index} 
-        className={`w-[100px] h-[50px] rounded-lg flex items-center justify-center ${
+        className={`w-[80px] h-[50px] rounded-lg flex items-center justify-center ${
         index === 2 ? "bg-[#1F4BFC]" : "bg-[#EDEDED]"
       }`}
       >
