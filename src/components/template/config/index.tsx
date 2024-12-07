@@ -42,7 +42,7 @@ export function Config({ visible }: { visible: boolean }) {
 
                 <View className="flex-row justify-between items-center bg-gray-100 p-8 rounded-lg mb-4">
                   <View className="flex-row items-center space-x-4">
-                    <Text className="text-black text-xl font-bold">Sobre</Text>
+                    <Text className="text-black text-xl font-bold">Ajuda e Suporte</Text>
                   </View>
                 </View>
 
