@@ -5,5 +5,6 @@ export interface IMainContext {
   handleLoading: (value?: boolean) => void;
   fontsLoaded: boolean;
   toast: (toast: ToastModel.IToast) => void;
-  toastRef: React.RefObject<ToastModel.IToastRef>;
+  onConfig: boolean;
+  handleConfig: (value?: boolean) => void;
 }

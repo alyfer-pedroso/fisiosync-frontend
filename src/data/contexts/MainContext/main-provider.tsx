@@ -9,9 +9,14 @@ import { Toast } from "@/components";
 export function MainProvider({ children }: { children: React.ReactNode }) {
   const toastRef = useRef<ToastModel.IToastRef>(null);
   const [loading, setLoading] = useState(false);
+  const [onConfig, setOnConfig] = useState(true); // TODO: setar como falso depois
 
   const handleLoading = (value?: boolean) => {
     setLoading((state) => value ?? !state);
+  };
+
+  const handleConfig = (value?: boolean) => {
+    setOnConfig((state) => value ?? !state);
   };
 
   const toast = ({ type, text, duration }: ToastModel.IToast) => {
@@ -42,7 +47,7 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
   });
 
   return (
-    <MainContext.Provider value={{ loading, handleLoading, fontsLoaded, toast, toastRef }}>
+    <MainContext.Provider value={{ loading, handleLoading, fontsLoaded, toast, onConfig, handleConfig }}>
       {fontsLoaded && <Toast ref={toastRef} />}
       {children}
     </MainContext.Provider>
