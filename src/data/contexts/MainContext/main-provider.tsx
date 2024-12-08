@@ -10,7 +10,7 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
   const toastRef = useRef<ToastModel.IToastRef>(null);
   const [loading, setLoading] = useState(false);
   const [onConfig, setOnConfig] = useState(false);
-  const [appState, setAppState] = useState<MainContextModel.TAppState>("search");
+  const [appState, setAppState] = useState<MainContextModel.TAppState>("playlist"); // TODO: colocar como 'search' depois
 
   const handleLoading = (value?: boolean) => {
     setLoading((state) => value ?? !state);

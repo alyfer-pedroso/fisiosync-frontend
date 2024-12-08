@@ -8,7 +8,7 @@ const initialState: MainContextModel.IMainContext = {
   toast: () => {},
   onConfig: false,
   handleConfig: () => {},
-  appState: "search",
+  appState: "playlist", // TODO: colocar como 'search' depois
   handleAppState: () => {},
 };
 
