@@ -1,11 +1,14 @@
+import { View, Text } from "react-native";
+import { Link, useRouter } from "expo-router";
+
 import { Button, Input, Page } from "@/components/template";
 import { TopButton } from "@/components/auth";
-import { View, Text } from "react-native";
-import { Link } from "expo-router";
 
 export default function Login() {
+  const router = useRouter();
+
   return (
-    <Page>
+    <Page header={false}>
       <View className="w-[90%] flex-row justify-between mx-auto">
         <TopButton text="Entrar" href="/(no-auth)/login" selected={true} />
         <TopButton text="Registrar-se" href="/(no-auth)/register" />
@@ -20,7 +23,7 @@ export default function Login() {
 
         <Input placeholder="Senha" className="placeholder:text-gray-500 font-inter-regular" />
 
-        <Button text="Log in" />
+        <Button text="Log in" onPress={() => router.push("/(with-auth)/home")} />
 
         <Text className="font-semibold text-center text-gray-500 text-lg m-1">OU</Text>
 

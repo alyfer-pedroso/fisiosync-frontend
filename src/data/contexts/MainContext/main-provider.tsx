@@ -1,17 +1,27 @@
 import { useRef, useState } from "react";
 import { useFonts } from "expo-font";
 
-import { ToastModel } from "@/data/models";
+import { ToastModel, MainContextModel } from "@/data/models";
+import { Toast } from "@/components";
 
 import { MainContext } from "./main-context";
-import { Toast } from "@/components";
 
 export function MainProvider({ children }: { children: React.ReactNode }) {
   const toastRef = useRef<ToastModel.IToastRef>(null);
   const [loading, setLoading] = useState(false);
+  const [onConfig, setOnConfig] = useState(false);
+  const [appState, setAppState] = useState<MainContextModel.TAppState>("search");
 
   const handleLoading = (value?: boolean) => {
     setLoading((state) => value ?? !state);
+  };
+
+  const handleConfig = (value?: boolean) => {
+    setOnConfig((state) => value ?? !state);
+  };
+
+  const handleAppState = (value: MainContextModel.TAppState) => {
+    setAppState(value);
   };
 
   const toast = ({ type, text, duration }: ToastModel.IToast) => {
@@ -42,7 +52,7 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
   });
 
   return (
-    <MainContext.Provider value={{ loading, handleLoading, fontsLoaded, toast, toastRef }}>
+    <MainContext.Provider value={{ loading, handleLoading, fontsLoaded, toast, onConfig, handleConfig, appState, handleAppState }}>
       {fontsLoaded && <Toast ref={toastRef} />}
       {children}
     </MainContext.Provider>

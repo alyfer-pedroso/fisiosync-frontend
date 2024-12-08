@@ -8,7 +8,7 @@ export default function Layout() {
 
   useEffect(() => {
     (async () => {
-      (await getData("token")) && router.push("/(with-auth)/(tabs-main)/home");
+      (await getData("token")) && router.push("/(with-auth)/home");
     })();
   }, []);
 
