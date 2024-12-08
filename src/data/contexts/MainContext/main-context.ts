@@ -6,7 +6,8 @@ const initialState: MainContextModel.IMainContext = {
   handleLoading: () => {},
   fontsLoaded: false,
   toast: () => {},
-  toastRef: null,
+  onConfig: false,
+  handleConfig: () => {},
 };
 
 export const MainContext = createContext<MainContextModel.IMainContext>(initialState);
