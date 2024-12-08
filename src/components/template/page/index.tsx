@@ -8,7 +8,7 @@ import { Header } from "../header";
 import { Config } from "../config";
 
 interface props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   header?: boolean;
 }

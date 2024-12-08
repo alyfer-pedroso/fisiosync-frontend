@@ -8,6 +8,8 @@ const initialState: MainContextModel.IMainContext = {
   toast: () => {},
   onConfig: false,
   handleConfig: () => {},
+  appState: "search",
+  handleAppState: () => {},
 };
 
 export const MainContext = createContext<MainContextModel.IMainContext>(initialState);

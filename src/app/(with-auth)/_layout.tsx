@@ -8,7 +8,7 @@ import { TabbarButton, TabbarText } from "@/components/template";
 export default function Layout() {
   const router = useRouter();
   const { getData } = useStorage();
-  const { handleLoading } = useMainContext();
+  const { handleLoading, appState } = useMainContext();
 
   useEffect(() => {
     (async () => {
@@ -37,10 +37,10 @@ export default function Layout() {
         }}
       />
       <Tabs.Screen
-        name="search/index"
+        name="music/index"
         options={{
-          title: "BUSCAR",
-          tabBarIcon: (props) => <Feather name="search" size={34} color={props.focused ? "#1F4BFC" : "#000"} />,
+          title: appState === "search" ? "BUSCAR" : "MÚSICA",
+          tabBarIcon: (props) => <Feather name={appState === "search" ? appState : "music"} size={34} color={props.focused ? "#1F4BFC" : "#000"} />,
         }}
       />
       <Tabs.Screen
