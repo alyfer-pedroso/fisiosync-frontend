@@ -9,7 +9,7 @@ import { Toast } from "@/components";
 export function MainProvider({ children }: { children: React.ReactNode }) {
   const toastRef = useRef<ToastModel.IToastRef>(null);
   const [loading, setLoading] = useState(false);
-  const [onConfig, setOnConfig] = useState(true); // TODO: setar como falso depois
+  const [onConfig, setOnConfig] = useState(false);
 
   const handleLoading = (value?: boolean) => {
     setLoading((state) => value ?? !state);
