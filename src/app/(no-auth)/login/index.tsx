@@ -1,11 +1,13 @@
 import { View, Text } from "react-native";
-import { Link, useRouter } from "expo-router";
+import { Link } from "expo-router";
 
 import { Button, Input, Page } from "@/components/template";
 import { TopButton } from "@/components/auth";
 
+import { useLogin } from "./hooks";
+
 export default function Login() {
-  const router = useRouter();
+  const { form, setValue, submitForm } = useLogin();
 
   return (
     <Page header={false}>
@@ -19,11 +21,22 @@ export default function Login() {
           <Text className="text-[1.5rem] text-center font-bold mb-6">Bem-vindo ao FisioSync</Text>
         </View>
 
-        <Input placeholder="Email ou número de telefone" className="placeholder:text-gray-500 font-inter-regular" />
+        <Input
+          placeholder="Email"
+          className="placeholder:text-gray-500 font-inter-regular"
+          onChange={(e) => setValue(e, "email")}
+          value={form.email}
+        />
 
-        <Input placeholder="Senha" className="placeholder:text-gray-500 font-inter-regular" />
+        <Input
+          placeholder="Senha"
+          className="placeholder:text-gray-500 font-inter-regular"
+          onChange={(e) => setValue(e, "password")}
+          value={form.password}
+          secureTextEntry
+        />
 
-        <Button text="Log in" onPress={() => router.push("/(with-auth)/home")} />
+        <Button text="Log in" onPress={submitForm} />
 
         <Text className="font-semibold text-center text-gray-500 text-lg m-1">OU</Text>
 

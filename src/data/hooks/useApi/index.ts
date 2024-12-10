@@ -16,7 +16,7 @@ export function useApi() {
 
   const api = axios.create({
     baseURL: process.env.EXPO_PUBLIC_API_URL,
-    headers: token ? { Authorization: `Bearer ${token}` } : {},
+    // headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
 
   return { api, URL: process.env.EXPO_PUBLIC_API_URL };
