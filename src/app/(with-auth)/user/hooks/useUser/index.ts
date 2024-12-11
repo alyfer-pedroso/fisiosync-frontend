@@ -21,6 +21,7 @@ export function useUser(): Models.IUserHook {
     await clearData("token");
     await clearData("user");
     await clearData("musics_recommendations");
+    router.push("/(no-auth)/login");
     handleLoading(false);
   };
 
