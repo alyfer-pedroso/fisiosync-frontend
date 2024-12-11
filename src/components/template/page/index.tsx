@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { SafeAreaView, View } from "react-native";
 
 import { useMainContext } from "@/data/hooks";
 import { cn } from "@/utils/cn";
@@ -17,11 +17,11 @@ export function Page({ children, header, className }: props) {
   const { loading, fontsLoaded, onConfig } = useMainContext();
 
   return (
-    <View className={cn("w-full flex-1 relative bg-white", className)}>
+    <SafeAreaView className={cn("w-full flex-1 relative bg-white", className)}>
       <Loading visible={loading || !fontsLoaded} />
       <Config visible={fontsLoaded && onConfig} />
       {(header ?? true) && <Header />}
       {fontsLoaded && children}
-    </View>
+    </SafeAreaView>
   );
 }
