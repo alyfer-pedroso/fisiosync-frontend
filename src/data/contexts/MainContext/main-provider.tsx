@@ -47,11 +47,13 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
   };
 
   const selectMusic = async ({ ...props }: MusicModel.IMusic) => {
-    handleLoading(true);
-    setPlaying(false);
-    await playAudio(playerData.current.link_mp3, true);
-    await clearAudio();
-    handleLoading(false);
+    if (playing) {
+      handleLoading(true);
+      setPlaying(false);
+      await playAudio(playerData.current.link_mp3, true);
+      await clearAudio();
+      handleLoading(false);
+    }
     playerData.current = { ...initialPlayer };
     setCurrentMusic({ ...props });
   };
