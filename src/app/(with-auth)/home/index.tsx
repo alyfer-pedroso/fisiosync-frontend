@@ -1,11 +1,13 @@
-import { Text } from "react-native";
-import { Page } from "@/components/template";
-import { View, TouchableOpacity, ScrollView } from "react-native";
-import Slider from "@react-native-community/slider";
 import { useState, useCallback } from "react";
+import { View, TouchableOpacity, ScrollView, Text } from "react-native";
+import Slider from "@react-native-community/slider";
 import { debounce } from "lodash";
 
+import { useUserData } from "@/data/hooks";
+import { Page } from "@/components/template";
+
 export default function Home() {
+  const { userData } = useUserData();
   const [sliderValue, setSliderValue] = useState(100);
 
   const handleSliderChange = useCallback(
@@ -27,8 +29,8 @@ export default function Home() {
     <Page>
       <View className="w-full flex-1 px-8 pb-8">
         <View>
-          <Text className="font-extrabold text-3xl pb-14">Olá, Usuario</Text>
-          <Text className="font-bold text-lg leading-tight">Metrónomo</Text>
+          <Text className="font-extrabold text-3xl pb-14">Olá, {userData.name}</Text>
+          <Text className="font-bold text-lg leading-tight">Metrônomo</Text>
           <Text className="text-[#B7B7B7] text-sm font-medium pb-3 leading-tight">Escolha a frequência do BPM abaixo.</Text>
         </View>
 
@@ -50,11 +52,7 @@ export default function Home() {
             </View>
 
             <View className="w-3/4 mb-2 flex-row items-center justify-center gap-4">
-              <TouchableOpacity
-                className="bg-[#1F4BFC] p-2 rounded-full"
-                onPress={handleDecrease}
-                style={{ width: 30, height: 30 }}
-              >
+              <TouchableOpacity className="bg-[#1F4BFC] p-2 rounded-full" onPress={handleDecrease} style={{ width: 30, height: 30 }}>
                 <Text className="text-white font-bold text-center">-</Text>
               </TouchableOpacity>
 
@@ -74,11 +72,7 @@ export default function Home() {
                 </View>
               </View>
 
-              <TouchableOpacity
-                className="bg-[#1F4BFC] p-2 rounded-full"
-                onPress={handleIncrease}
-                style={{ width: 30, height: 30 }}
-              >
+              <TouchableOpacity className="bg-[#1F4BFC] p-2 rounded-full" onPress={handleIncrease} style={{ width: 30, height: 30 }}>
                 <Text className="text-white font-bold text-center">+</Text>
               </TouchableOpacity>
             </View>

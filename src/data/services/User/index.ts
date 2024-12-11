@@ -1,23 +1,22 @@
 import { useCallback } from "react";
 
-import { GetError } from "@/data/constants";
 import { useApi, useMainContext } from "@/data/hooks";
-import { LoginModel } from "@/data/models";
+import { GetError } from "@/data/constants";
+import { UserModel } from "@/data/models";
 
-export function Login() {
+export function User() {
   const { api } = useApi();
   const { toast } = useMainContext();
 
-  const SignIn = useCallback(
-    async ({ email, password }: LoginModel.IForm) => {
+  const GetUserData = useCallback(
+    async (id: number, token?: string): Promise<UserModel.IUser | undefined> => {
       try {
-        const { data } = await api.post("/login", { email, password });
+        const { data } = await api.get(`/get-users/${id}`, { headers: token ? { Authorization: `Bearer ${token}` } : {} });
         if (data.error) {
           toast({ type: "error", text: data.data });
           return;
         }
 
-        toast({ type: "success", text: data.message });
         return data.data;
       } catch (error) {
         toast({ type: "error", text: GetError(error) });
@@ -26,5 +25,5 @@ export function Login() {
     [api, toast]
   );
 
-  return { SignIn };
+  return { GetUserData };
 }
