@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 import { NativeSyntheticEvent, TextInputChangeEventData } from "react-native";
-import { useRouter } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import { jwtDecode } from "jwt-decode";
 
 import { Login, User } from "@/data/services";
@@ -12,7 +12,7 @@ export function useLogin() {
 
   const { SignIn } = Login();
   const { GetUserData } = User();
-  const { setData } = useStorage();
+  const { setData, getData } = useStorage();
 
   const { toast, handleLoading } = useMainContext();
   const [form, setForm] = useState<LoginModel.IForm>({ email: "", password: "" });
@@ -42,10 +42,17 @@ export function useLogin() {
       }
       handleLoading(false);
     } catch (error) {
-      toast({ type: "error", text: `${error}`, duration: 5000 });
       handleLoading(false);
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      (async () => {
+        (await getData("token")) && router.push("/(with-auth)/home");
+      })();
+    }, [])
+  );
 
   return { form, setValue, submitForm };
 }
