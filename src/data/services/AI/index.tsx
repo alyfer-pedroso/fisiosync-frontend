@@ -10,7 +10,7 @@ export function AI() {
 
   const GetMusicRecommendations = useCallback(async (id: number): Promise<{ musics: MusicModel.IMusic[] } | undefined> => {
     try {
-      const { data } = await api.get(`/openai/get-music-recommendations-byuser/${id}`);
+      const { data } = await api.get(`/gemini/get-music-recommendations-byuser/${id}`);
       if (data.error) {
         toast({ type: "error", text: data.data });
         return;
