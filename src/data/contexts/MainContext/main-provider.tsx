@@ -2,21 +2,27 @@ import { useEffect, useRef, useState } from "react";
 import { useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 
-import { ToastModel, MainContextModel, MusicModel } from "@/data/models";
+import { usePlayAudio } from "@/data/hooks";
+import { ToastModel, MainContextModel, MusicModel, PlayerModel } from "@/data/models";
 import { Toast } from "@/components";
 
 import { MainContext } from "./main-context";
 
 const initialMusic = { title: "", link_youtube: "", thumbnail: "", bpm: 0 };
+const initialPlayer = { link_mp3: "", current_time: 0, max_time: 0, paused: true, title: "" };
+
 export function MainProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
   const toastRef = useRef<ToastModel.IToastRef>(null);
+  const playerData = useRef<PlayerModel.IPlayer>(initialPlayer);
 
   const [loading, setLoading] = useState(false);
   const [onConfig, setOnConfig] = useState(false);
   const [appState, setAppState] = useState<MainContextModel.TAppState>("search");
   const [currentMusic, setCurrentMusic] = useState<MusicModel.IMusic>(initialMusic);
+
+  const { clearAudio, playAudio } = usePlayAudio();
 
   const handleLoading = (value?: boolean) => {
     setLoading((state) => value ?? !state);
@@ -70,9 +76,36 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
     setAppState("search");
   }, [currentMusic]);
 
+  useEffect(() => {
+    (async () => {
+      if (playerData.current.title && currentMusic.title) {
+        console.log(currentMusic.title);
+        console.log(playerData.current.title);
+        if (playerData.current.title !== currentMusic.title) {
+          playerData.current = { ...initialPlayer };
+          await playAudio(playerData.current.link_mp3);
+          await clearAudio();
+          return;
+        }
+      }
+    })();
+  }, [currentMusic, playerData.current]);
+
   return (
     <MainContext.Provider
-      value={{ loading, handleLoading, fontsLoaded, toast, onConfig, handleConfig, appState, handleAppState, currentMusic, selectMusic }}
+      value={{
+        loading,
+        handleLoading,
+        fontsLoaded,
+        toast,
+        onConfig,
+        handleConfig,
+        appState,
+        handleAppState,
+        currentMusic,
+        selectMusic,
+        playerData,
+      }}
     >
       {fontsLoaded && <Toast ref={toastRef} />}
       {children}

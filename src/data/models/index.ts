@@ -5,3 +5,4 @@ export * as RegisterModel from "./register";
 export * as CategoriesModel from "./categories";
 export * as UserModel from "./user";
 export * as MusicModel from "./music";
+export * as PlayerModel from "./player";

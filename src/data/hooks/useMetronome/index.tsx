@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { usePlayAudio } from "../usePlayAudio";
 
 export function useMetronome(bpm: number) {
-  const { playAudio } = usePlayAudio();
+  const { playAudioOnce } = usePlayAudio();
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [beat, setBeat] = useState(0);
@@ -13,7 +13,7 @@ export function useMetronome(bpm: number) {
 
     intervalRef.current = setInterval(() => {
       setBeat((prevBeat) => {
-        playAudio(`https://www.musicca.com/lydfiler/metronome/metronome${(prevBeat + 2) % 4 === 1 ? 1 : 2}.mp3`);
+        playAudioOnce(`https://www.musicca.com/lydfiler/metronome/metronome${(prevBeat + 2) % 4 === 1 ? 1 : 2}.mp3`);
         return (prevBeat + 1) % 4;
       });
     }, interval);

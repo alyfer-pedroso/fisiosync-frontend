@@ -1,4 +1,5 @@
-import { MusicModel, ToastModel } from ".";
+import { MutableRefObject } from "react";
+import { MusicModel, PlayerModel, ToastModel } from ".";
 
 export type TAppState = "search" | "playlist" | "player";
 
@@ -13,4 +14,5 @@ export interface IMainContext {
   handleAppState: (value: TAppState) => void;
   currentMusic: MusicModel.IMusic;
   selectMusic: (music: MusicModel.IMusic) => void;
+  playerData: MutableRefObject<PlayerModel.IPlayer>;
 }

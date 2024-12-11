@@ -52,7 +52,7 @@ export function Search() {
               </View>
             ) : (
               categories.map((category) => (
-                <View className="flex flex-col items-center w-[100px] bg-gray-200 rounded-lg l h-[50px] justify-center">
+                <View key={category.name} className="flex flex-col items-center w-[100px] bg-gray-200 rounded-lg l h-[50px] justify-center">
                   <Text className="font-inter-semi-bold">{category.name.toUpperCase()}</Text>
                 </View>
               ))

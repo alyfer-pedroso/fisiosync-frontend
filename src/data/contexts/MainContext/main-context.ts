@@ -12,6 +12,7 @@ const initialState: MainContextModel.IMainContext = {
   handleAppState: () => {},
   currentMusic: { title: "", link_youtube: "", thumbnail: "", bpm: 0 },
   selectMusic: () => {},
+  playerData: { current: { link_mp3: "", current_time: 0, max_time: 0, paused: true, title: "" } },
 };
 
 export const MainContext = createContext<MainContextModel.IMainContext>(initialState);
