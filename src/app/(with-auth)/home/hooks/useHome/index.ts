@@ -10,7 +10,7 @@ export function useHome() {
   const { userData } = useUserData();
   const { GetMusicRecommendations } = AI();
   const { getData, setData } = useStorage();
-  const { handleLoading, selectMusic } = useMainContext();
+  const { handleLoading, selectMusic, toast } = useMainContext();
 
   const [sliderValue, setSliderValue] = useState(100);
   const [musics, setMusics] = useState<MusicModel.IMusic[]>([]);
@@ -32,21 +32,23 @@ export function useHome() {
   };
 
   const getMusics = async () => {
-    if (id) handleLoading(true);
-    (async () => {
-      const storageMusics = JSON.parse((await getData("musics_recommendations")) ?? "[]");
-      if (storageMusics.length > 0) {
-        setMusics(storageMusics);
+    if (id) {
+      (async () => {
+        const storageMusics = JSON.parse((await getData("musics_recommendations")) ?? "[]");
+        if (storageMusics.length > 0) {
+          setMusics(storageMusics);
+          return;
+        }
+        toast({ type: "success", text: "Nossa IA está procurando as melhores músicas para você!" });
+        handleLoading(true);
+        const musicsData = await GetMusicRecommendations(id);
+        if (musicsData?.musics) {
+          setMusics(musicsData.musics);
+          await setData("musics_recommendations", JSON.stringify(musicsData.musics));
+        }
         handleLoading(false);
-        return;
-      }
-      const musicsData = await GetMusicRecommendations(id);
-      if (musicsData?.musics) {
-        setMusics(musicsData.musics);
-        await setData("musics_recommendations", JSON.stringify(musicsData.musics));
-      }
-      handleLoading(false);
-    })();
+      })();
+    }
   };
 
   useEffect(() => {

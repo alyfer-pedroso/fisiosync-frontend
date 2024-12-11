@@ -7,7 +7,7 @@ import { useMainContext, usePlayAudio } from "@/data/hooks";
 export function Header() {
   const segments = useSegments();
   const { playAudio, clearAudio } = usePlayAudio();
-  const { handleConfig, currentMusic, selectMusic, playerData } = useMainContext();
+  const { handleConfig, currentMusic, selectMusic, playerData, playing } = useMainContext();
 
   return (
     <View className="w-full flex-row items-center justify-between px-6 py-6 gap-4">
@@ -19,10 +19,10 @@ export function Header() {
             color="#1F4BFC"
             onPress={async () => {
               selectMusic({ title: "", link_youtube: "", thumbnail: "", bpm: 0 });
-              playerData.current = { link_mp3: "", current_time: 0, max_time: 0, paused: true, title: "" };
-              if (!playerData.current.paused) {
+              if (playing) {
                 await playAudio(playerData.current.link_mp3);
                 await clearAudio();
+                playerData.current = { link_mp3: "", current_time: 0, max_time: 0, paused: true, title: "" };
               }
             }}
           />

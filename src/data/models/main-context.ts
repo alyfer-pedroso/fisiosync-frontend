@@ -15,4 +15,6 @@ export interface IMainContext {
   currentMusic: MusicModel.IMusic;
   selectMusic: (music: MusicModel.IMusic) => void;
   playerData: MutableRefObject<PlayerModel.IPlayer>;
+  playing: boolean;
+  setPlaying: (value: boolean) => void;
 }

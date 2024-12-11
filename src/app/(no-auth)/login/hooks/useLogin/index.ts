@@ -38,6 +38,7 @@ export function useLogin() {
         const userdata = await GetUserData(decodedToken.id, data.token);
         await setData("user", JSON.stringify(userdata));
         router.push("/(with-auth)/home");
+        return;
       }
       handleLoading(false);
     } catch (error) {

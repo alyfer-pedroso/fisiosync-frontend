@@ -18,7 +18,7 @@ export function Register() {
           return;
         }
 
-        toast({ type: "success", text: "Usuário cadastrado com sucesso!" });
+        toast({ type: "success", text: "Usuário cadastrado com sucesso!", duration: 5000 });
       } catch (error) {
         toast({ type: "error", text: GetError(error) });
       }

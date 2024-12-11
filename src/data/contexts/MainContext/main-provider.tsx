@@ -3,6 +3,7 @@ import { useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 
 import { usePlayAudio } from "@/data/hooks";
+import { Music } from "@/data/services";
 import { ToastModel, MainContextModel, MusicModel, PlayerModel } from "@/data/models";
 import { Toast } from "@/components";
 
@@ -14,6 +15,8 @@ const initialPlayer = { link_mp3: "", current_time: 0, max_time: 0, paused: true
 export function MainProvider({ children }: { children: React.ReactNode }) {
   const router = useRouter();
 
+  const { ToMp3 } = Music();
+
   const toastRef = useRef<ToastModel.IToastRef>(null);
   const playerData = useRef<PlayerModel.IPlayer>(initialPlayer);
 
@@ -21,6 +24,7 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
   const [onConfig, setOnConfig] = useState(false);
   const [appState, setAppState] = useState<MainContextModel.TAppState>("search");
   const [currentMusic, setCurrentMusic] = useState<MusicModel.IMusic>(initialMusic);
+  const [playing, setPlaying] = useState(false);
 
   const { clearAudio, playAudio } = usePlayAudio();
 
@@ -42,7 +46,13 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const selectMusic = ({ ...props }: MusicModel.IMusic) => {
+  const selectMusic = async ({ ...props }: MusicModel.IMusic) => {
+    handleLoading(true);
+    setPlaying(false);
+    await playAudio(playerData.current.link_mp3, true);
+    await clearAudio();
+    handleLoading(false);
+    playerData.current = { ...initialPlayer };
     setCurrentMusic({ ...props });
   };
 
@@ -67,29 +77,27 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
     "Inter-ThinItalic": require("@/fonts/inter/Inter_18pt-ThinItalic.ttf"),
   });
 
+  const loadMusic = async () => {
+    handleLoading(true);
+    setPlaying(false);
+    const data = await ToMp3(currentMusic.link_youtube);
+    if (data?.url) {
+      // const size: number = await getAudioSize(data.url);
+      const size = 0;
+      playerData.current = { link_mp3: data.url, current_time: 0, max_time: size ?? 0, paused: true, title: currentMusic.title };
+    }
+    setAppState("player");
+    router.push("/music");
+    handleLoading(false);
+  };
+
   useEffect(() => {
     if (currentMusic.title) {
-      setAppState("player");
-      router.push("/music");
+      loadMusic();
       return;
     }
     setAppState("search");
-  }, [currentMusic]);
-
-  useEffect(() => {
-    (async () => {
-      if (playerData.current.title && currentMusic.title) {
-        console.log(currentMusic.title);
-        console.log(playerData.current.title);
-        if (playerData.current.title !== currentMusic.title) {
-          playerData.current = { ...initialPlayer };
-          await playAudio(playerData.current.link_mp3);
-          await clearAudio();
-          return;
-        }
-      }
-    })();
-  }, [currentMusic, playerData.current]);
+  }, [currentMusic.title]);
 
   return (
     <MainContext.Provider
@@ -105,6 +113,8 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
         currentMusic,
         selectMusic,
         playerData,
+        playing,
+        setPlaying,
       }}
     >
       {fontsLoaded && <Toast ref={toastRef} />}

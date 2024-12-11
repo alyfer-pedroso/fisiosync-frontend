@@ -6,9 +6,7 @@ import { Page } from "@/components/template";
 import { usePlayer } from "./hooks";
 
 export function Player() {
-  const { currentMusic, playerData, play } = usePlayer();
-
-  const playing = !playerData.current.paused;
+  const { currentMusic, playerData, play, playing } = usePlayer();
 
   return (
     <Page>

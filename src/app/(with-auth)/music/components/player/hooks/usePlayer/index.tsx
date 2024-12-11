@@ -9,7 +9,7 @@ export function usePlayer() {
 
   const { ToMp3 } = Music();
 
-  const { currentMusic, playerData, handleLoading } = useMainContext();
+  const { currentMusic, playerData, handleLoading, playing, setPlaying } = useMainContext();
   const { getData, setData } = useStorage();
   const { getAudioSize, playAudio } = usePlayAudio();
 
@@ -34,14 +34,14 @@ export function usePlayer() {
 
   const play = async () => {
     if (playerData.current.link_mp3) {
-      playerData.current = { ...playerData.current, paused: playerData.current.paused ? false : true };
+      setPlaying(!playing);
       await playAudio(playerData.current.link_mp3);
     }
   };
 
-  useEffect(() => {
-    if (currentMusic.title) convert();
-  }, [currentMusic.title]);
+  // useEffect(() => {
+  // if (currentMusic.title) convert();
+  // }, [currentMusic.title]);
 
-  return { currentMusic, playerData, play };
+  return { currentMusic, playerData, play, playing };
 }

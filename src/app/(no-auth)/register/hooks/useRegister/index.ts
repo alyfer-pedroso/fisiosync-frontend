@@ -46,10 +46,8 @@ export function useRegister(): IUseRegister {
 
   useLayoutEffect(() => {
     (async () => {
-      handleLoading(true);
       const categories = await GetCategories();
       if (categories) setCategories(categories);
-      handleLoading(false);
     })();
   }, []);
 

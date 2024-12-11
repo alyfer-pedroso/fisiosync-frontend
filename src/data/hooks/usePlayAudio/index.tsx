@@ -29,7 +29,7 @@ export function usePlayAudio() {
     }
   };
 
-  const playAudio = async (source: string) => {
+  const playAudio = async (source: string, stop?: boolean) => {
     try {
       if (!sound) {
         const { sound: newSound } = await Audio.Sound.createAsync({ uri: source });
@@ -43,6 +43,10 @@ export function usePlayAudio() {
 
         await newSound.playAsync();
       } else {
+        if (stop) {
+          await clearAudio();
+          return;
+        }
         const status = await sound.getStatusAsync();
         if (status.isPlaying) {
           await sound.pauseAsync();
