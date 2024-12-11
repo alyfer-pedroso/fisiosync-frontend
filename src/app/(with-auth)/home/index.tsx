@@ -11,7 +11,7 @@ import { Link } from "expo-router";
 // import audio from "@/audios/metronome2.mp3";
 
 export default function Home() {
-  const { userData, handleSliderChange, sliderValue, handleDecrease, handleIncrease, musics } = useHome();
+  const { userData, handleSliderChange, sliderValue, handleDecrease, handleIncrease, musics, selectMusic } = useHome();
   const { toggleMetronome, beat, isPlaying } = useMetronome(sliderValue);
 
   return (
@@ -93,9 +93,9 @@ export default function Home() {
               </View>
             ) : (
               musics.map((music, index) => (
-                <View key={index} className="bg-[#EDEDED] w-32 h-52 rounded-2xl overflow-hidden">
+                <TouchableOpacity key={index} className="bg-[#EDEDED] w-32 h-52 rounded-2xl overflow-hidden" onPress={() => selectMusic(music)}>
                   <Image source={{ uri: music.thumbnail }} className="w-full h-52 scale-150" resizeMode="cover" />
-                </View>
+                </TouchableOpacity>
               ))
             )}
           </ScrollView>

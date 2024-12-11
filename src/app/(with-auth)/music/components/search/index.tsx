@@ -1,11 +1,14 @@
-import { View, Text } from "react-native";
+import { View, Text, ScrollView, ActivityIndicator, Image, TouchableOpacity } from "react-native";
 import { Page, Input } from "@/components/template";
+import { useSearch } from "./hooks";
 
 export function Search() {
+  const { musics, categories, selectMusic } = useSearch();
+
   return (
     <Page>
-      <View className="flex-1 px-4 sm:px-8 py-10">
-        <View className="pt-16 w-full flex items-center gap-5">
+      <View className="flex-1 px-4 sm:px-8">
+        <View className="w-full flex items-center gap-5">
           <Text className="text-center text-xl font-bold">Escolha sua música favorita</Text>
           <Text className="text-center text-sm font-light pb-2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus placerat turpis vitae enim pretium elementum...
@@ -20,57 +23,41 @@ export function Search() {
         <View className="h-auto flex flex-col space-y-6 pt-10 gap-1 w-full">
           <Text className="text-left text-xl font-bold">Músicas BPM</Text>
 
-          <View className="h-auto flex flex-wrap justify-between gap-4 w-full pt-4 pb-2">
-            <View className="flex flex-row justify-between gap-4 w-full">
-              <View className="flex flex-col items-stretch flex-1">
-                <View className="bg-gray-200 rounded-xl w-full h-[100px]" />
-                <Text className="pt-2 text-left text-lg font-medium">Álbum 1</Text>
-                <Text className="text-left text-sm font-light">Artista</Text>
+          <ScrollView className="w-full mt-4 mb-2 rounded-lg" horizontal showsHorizontalScrollIndicator={false} contentContainerClassName="gap-2">
+            {musics.length === 0 ? (
+              <View className="w-[100px] h-[100px] justify-center">
+                <ActivityIndicator size="large" />
               </View>
-
-              <View className="flex flex-col items-stretch flex-1">
-                <View className="bg-gray-200 rounded-xl w-full h-[100px]" />
-                <Text className="pt-2 text-left text-lg font-medium">Álbum 2</Text>
-                <Text className="text-left text-sm font-light">Artista</Text>
-              </View>
-
-              <View className="flex flex-col items-stretch flex-1">
-                <View className="bg-gray-200 rounded-xl w-full h-[100px]" />
-                <Text className="pt-2 text-left text-lg font-medium">Álbum 3</Text>
-                <Text className="text-left text-sm font-light">Artista</Text>
-              </View>
-            </View>
-          </View>
+            ) : (
+              musics.map((music) => (
+                <TouchableOpacity className="w-[100px] flex-1" key={music.title} onPress={() => selectMusic(music)}>
+                  <View className="w-full overflow-hidden rounded-xl">
+                    <Image className="bg-gray-200 w-full h-[100px] scale-150" source={{ uri: music.thumbnail }} resizeMode="cover" />
+                  </View>
+                  <Text className="pt-2 text-left text-lg font-medium">{music.title.split("-")[0]}</Text>
+                  <Text className="text-left text-sm font-light">{music.title.split("-")[1]}</Text>
+                </TouchableOpacity>
+              ))
+            )}
+          </ScrollView>
         </View>
 
         <View className="h-auto flex flex-wrap space-y-6 pt-6 gap-1 w-full">
           <Text className="text-left text-xl font-bold">Navegar por gêneros</Text>
 
-          <View className="flex-row flex-wrap justify-around gap-4 pt-4">
-            <View className="flex flex-col items-center w-[30%]">
-              <View className="bg-gray-200 rounded-lg w-full h-[65px]" />
-            </View>
-
-            <View className="flex flex-col items-center w-[30%]">
-              <View className="bg-gray-200 rounded-lg w-full h-[65px]" />
-            </View>
-
-            <View className="flex flex-col items-center w-[30%]">
-              <View className="bg-gray-200 rounded-lg w-full h-[65px]" />
-            </View>
-
-            <View className="flex flex-col items-center w-[30%]">
-              <View className="bg-gray-200 rounded-lg w-full h-[65px]" />
-            </View>
-
-            <View className="flex flex-col items-center w-[30%]">
-              <View className="bg-gray-200 rounded-lg w-full h-[65px]" />
-            </View>
-
-            <View className="flex flex-col items-center w-[30%]">
-              <View className="bg-gray-200 rounded-lg w-full h-[65px]" />
-            </View>
-          </View>
+          <ScrollView className="w-full mt-4 rounded-lg" horizontal showsHorizontalScrollIndicator={false} contentContainerClassName="gap-2">
+            {categories.length === 0 ? (
+              <View className="h-[50px] justify-center">
+                <ActivityIndicator size="large" />
+              </View>
+            ) : (
+              categories.map((category) => (
+                <View className="flex flex-col items-center w-[100px] bg-gray-200 rounded-lg l h-[50px] justify-center">
+                  <Text className="font-inter-semi-bold">{category.name.toUpperCase()}</Text>
+                </View>
+              ))
+            )}
+          </ScrollView>
         </View>
       </View>
     </Page>

@@ -1,4 +1,4 @@
-import { ToastModel } from ".";
+import { MusicModel, ToastModel } from ".";
 
 export type TAppState = "search" | "playlist" | "player";
 
@@ -11,4 +11,6 @@ export interface IMainContext {
   handleConfig: (value?: boolean) => void;
   appState: TAppState;
   handleAppState: (value: TAppState) => void;
+  currentMusic: MusicModel.IMusic;
+  selectMusic: (music: MusicModel.IMusic) => void;
 }

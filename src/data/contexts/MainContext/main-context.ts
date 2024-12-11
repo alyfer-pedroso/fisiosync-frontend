@@ -10,6 +10,8 @@ const initialState: MainContextModel.IMainContext = {
   handleConfig: () => {},
   appState: "search",
   handleAppState: () => {},
+  currentMusic: { title: "", link_youtube: "", thumbnail: "", bpm: 0 },
+  selectMusic: () => {},
 };
 
 export const MainContext = createContext<MainContextModel.IMainContext>(initialState);

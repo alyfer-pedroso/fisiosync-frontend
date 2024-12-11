@@ -10,7 +10,7 @@ export function useHome() {
   const { userData } = useUserData();
   const { GetMusicRecommendations } = AI();
   const { getData, setData } = useStorage();
-  const { handleLoading } = useMainContext();
+  const { handleLoading, selectMusic } = useMainContext();
 
   const [sliderValue, setSliderValue] = useState(100);
   const [musics, setMusics] = useState<MusicModel.IMusic[]>([]);
@@ -63,5 +63,5 @@ export function useHome() {
     }, [])
   );
 
-  return { userData, handleSliderChange, sliderValue, handleDecrease, handleIncrease, musics };
+  return { userData, handleSliderChange, sliderValue, handleDecrease, handleIncrease, musics, selectMusic };
 }

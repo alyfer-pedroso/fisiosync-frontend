@@ -1,16 +1,22 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "expo-router";
 import { useFonts } from "expo-font";
 
-import { ToastModel, MainContextModel } from "@/data/models";
+import { ToastModel, MainContextModel, MusicModel } from "@/data/models";
 import { Toast } from "@/components";
 
 import { MainContext } from "./main-context";
 
+const initialMusic = { title: "", link_youtube: "", thumbnail: "", bpm: 0 };
 export function MainProvider({ children }: { children: React.ReactNode }) {
+  const router = useRouter();
+
   const toastRef = useRef<ToastModel.IToastRef>(null);
+
   const [loading, setLoading] = useState(false);
   const [onConfig, setOnConfig] = useState(false);
   const [appState, setAppState] = useState<MainContextModel.TAppState>("search");
+  const [currentMusic, setCurrentMusic] = useState<MusicModel.IMusic>(initialMusic);
 
   const handleLoading = (value?: boolean) => {
     setLoading((state) => value ?? !state);
@@ -28,6 +34,10 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
     if (toastRef.current) {
       toastRef.current.show({ type, text, duration });
     }
+  };
+
+  const selectMusic = ({ ...props }: MusicModel.IMusic) => {
+    setCurrentMusic({ ...props });
   };
 
   const [fontsLoaded] = useFonts({
@@ -51,8 +61,19 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
     "Inter-ThinItalic": require("@/fonts/inter/Inter_18pt-ThinItalic.ttf"),
   });
 
+  useEffect(() => {
+    if (currentMusic.title) {
+      setAppState("player");
+      router.push("/music");
+      return;
+    }
+    setAppState("search");
+  }, [currentMusic]);
+
   return (
-    <MainContext.Provider value={{ loading, handleLoading, fontsLoaded, toast, onConfig, handleConfig, appState, handleAppState }}>
+    <MainContext.Provider
+      value={{ loading, handleLoading, fontsLoaded, toast, onConfig, handleConfig, appState, handleAppState, currentMusic, selectMusic }}
+    >
       {fontsLoaded && <Toast ref={toastRef} />}
       {children}
     </MainContext.Provider>
