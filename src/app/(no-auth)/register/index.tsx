@@ -20,10 +20,8 @@ export default function Register() {
 
       <View className="w-full gap-[2.5vh]">
         <View className="pt-[15%] items-center">
-          <Text className="text-[60px] font-black text-center font-inter-Black">Bem-Vindo!</Text>
-          <Text className="text-[20px] font-bold text-center w-[80%] font-inter-regular">
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-          </Text>
+          <Text className="text-[60px] text-center font-inter-black">Bem-Vindo!</Text>
+          <Text className="text-[20px] font-bold text-center w-[80%] font-inter-medium">Movimente-se no ritmo da recuperação!</Text>
         </View>
 
         <View className="w-full gap-2 items-center">

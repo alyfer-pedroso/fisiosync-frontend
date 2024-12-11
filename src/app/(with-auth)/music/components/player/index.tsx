@@ -22,11 +22,8 @@ export function Player() {
           </View>
         </View>
 
-        <View className="w-full rounded-xl overflow-hidden bg-[#D9D9D9]">
-          <View
-            className="bg-[#9E9E9E] h-3 rounded-xl"
-            style={{ width: `${(playerData.current.max_time / 100) * playerData.current.current_time}%` }}
-          ></View>
+        <View className="w-full items-center rounded-xl overflow-hidden bg-[#D9D9D9]">
+          <Text className="text-center text-xl font-inter-bold">BPM: {currentMusic.bpm}</Text>
         </View>
 
         <View className="w-full flex-row items-center justify-between">

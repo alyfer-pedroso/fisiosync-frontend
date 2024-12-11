@@ -18,20 +18,20 @@ export function ViewUser({ ...props }: Models.IUserHook) {
       <View className="w-[90%] mx-auto flex-row justfy-around gap-4 p-2.5">
         <View className="w-[50%] gap-3">
           <View>
-            <Text className="text-[20px] font-black font-inter-Black">Nome</Text>
-            <Input className="text-gray-500 font-inter-regular" value={userData.name} />
+            <Text className="text-[18px] font-black font-inter-Black">Nome</Text>
+            <Input className="text-gray-500 h-12 font-inter-regular" value={userData.name} />
           </View>
 
           <View>
-            <Text className="text-[20px] font-black font-inter-Black">Email</Text>
-            <Input className=" text-gray-500 font-inter-regular" value={userData.email} />
+            <Text className="text-[18px] font-black font-inter-Black">Email</Text>
+            <Input className=" text-gray-500 h-12 font-inter-regular" value={userData.email} />
           </View>
         </View>
 
         <View className="w-[50%] gap-3 justify-end">
           <View>
-            <Text className="text-[20px] font-black font-inter-Black">Escala Hoehn e Yahr</Text>
-            <Input className=" text-gray-500 font-inter-regular" value={String(userData.scaleId)} />
+            <Text className="text-[18px] font-black font-inter-Black">Escala Hoehn e Yahr</Text>
+            <Input className=" text-gray-500 h-12 font-inter-regular" value={String(userData.scaleId)} />
           </View>
         </View>
       </View>
@@ -66,12 +66,12 @@ export function ViewUser({ ...props }: Models.IUserHook) {
           <Button
             text="Alterar dados"
             className="w-[140px] h-[50px] flex items-center justify-center text-center"
-            onPress={() => changeState("config")}
+            onPress={() => changeState("view")}
           />
           <Button text="Sair" className="w-[140px] h-[50px] flex items-center justify-center text-center bg-[#0D006F]" onPress={logOut} />
         </View>
         <View className="w-[50%] h-[120px] bg-[#EDEDED] rounded-lg flex items-center justify-center">
-          <Text className="text-[50px] font-inter-regular text-center">90 bpm</Text>
+          <Text className="text-[40px] font-inter-regular text-center">90 bpm</Text>
         </View>
       </View>
     </Page>

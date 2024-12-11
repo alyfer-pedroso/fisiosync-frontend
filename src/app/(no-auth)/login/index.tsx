@@ -1,4 +1,4 @@
-import { View, Text } from "react-native";
+import { View, Text, Image } from "react-native";
 import { Link } from "expo-router";
 
 import { Button, Input, Page } from "@/components/template";
@@ -9,6 +9,8 @@ import { useLogin } from "./hooks";
 export default function Login() {
   const { form, setValue, submitForm } = useLogin();
 
+  const logo = require("../../../components/images/logo.png");
+
   return (
     <Page header={false}>
       <View className="w-[90%] flex-row justify-between mx-auto">
@@ -16,7 +18,11 @@ export default function Login() {
         <TopButton text="Registrar-se" href="/(no-auth)/register" />
       </View>
 
-      <View className="flex-1 items-center justify-center gap-3">
+      <View className="w-[90%] mx-auto items-center py-[5%]">
+        <Image className="w-[50%]" source={logo} resizeMode="contain" />
+      </View>
+
+      <View className="items-center justify-center gap-3">
         <View>
           <Text className="text-[1.5rem] text-center font-bold mb-6">Bem-vindo ao FisioSync</Text>
         </View>
