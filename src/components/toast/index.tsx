@@ -59,13 +59,13 @@ export const Toast = React.forwardRef(({}, ref: React.Ref<ToastModel.IToastRef>)
     showing && (
       <Animated.View
         className={cn(
-          "w-[85%] absolute z-[50] flex-row items-center border-[1px] rounded-[18px] p-[10px] left-[7%] shadow-xl opacity-90",
+          "w-[85%] absolute z-[99] flex-row items-center border-[1px] rounded-[18px] p-[10px] left-[7%] shadow-xl opacity-90",
           stylesContainer[toastType]
         )}
         style={[{ top: TOP_VALUE }, animatedTopStyle]}
       >
         {icons[toastType]}
-        <Text className={cn("ml-[16px] text-xl font-inter-regular", stylesText[toastType])}>{toastText}</Text>
+        <Text className={cn("ml-[16px] text-lg font-inter-regular", stylesText[toastType])}>{toastText}</Text>
       </Animated.View>
     )
   );
