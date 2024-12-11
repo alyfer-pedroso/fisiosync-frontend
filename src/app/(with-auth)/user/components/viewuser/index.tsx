@@ -4,7 +4,7 @@ import { Page, Input, Button } from "@/components/template";
 import * as Models from "../../model";
 
 export function ViewUser({ ...props }: Models.IUserHook) {
-  const { changeState, userData } = props;
+  const { changeState, userData, logOut } = props;
 
   return (
     <Page className="w-full flex-1">
@@ -68,7 +68,7 @@ export function ViewUser({ ...props }: Models.IUserHook) {
             className="w-[140px] h-[50px] flex items-center justify-center text-center"
             onPress={() => changeState("config")}
           />
-          <Button text="Sair" className="w-[140px] h-[50px] flex items-center justify-center text-center bg-[#0D006F]" />
+          <Button text="Sair" className="w-[140px] h-[50px] flex items-center justify-center text-center bg-[#0D006F]" onPress={logOut} />
         </View>
         <View className="w-[50%] h-[120px] bg-[#EDEDED] rounded-lg flex items-center justify-center">
           <Text className="text-[50px] font-inter-regular text-center">90 bpm</Text>

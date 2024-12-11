@@ -6,4 +6,5 @@ export interface IUserHook {
   userState: TUserState;
   changeState: (value?: TUserState) => void;
   userData: UserModel.IUser;
+  logOut: () => Promise<void>;
 }
