@@ -23,7 +23,7 @@ export function useLogin() {
   };
 
   const submitForm = async () => {
-    if (!form.email || !form.password) return toast({ type: "error", text: "Preencha todos os campos" });
+    if (!form.email || !form.password) return toast({ type: "error", text: "Preencha todos os campos!" });
 
     handleLoading(true);
     await SignIn(form).then((res) => {
