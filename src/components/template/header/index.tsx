@@ -19,10 +19,10 @@ export function Header() {
             color="#1F4BFC"
             onPress={async () => {
               selectMusic({ title: "", link_youtube: "", thumbnail: "", bpm: 0 });
+              playerData.current = { link_mp3: "", current_time: 0, max_time: 0, paused: true, title: "" };
               if (playing) {
-                await playAudio(playerData.current.link_mp3);
+                await playAudio(playerData.current.link_mp3, true);
                 await clearAudio();
-                playerData.current = { link_mp3: "", current_time: 0, max_time: 0, paused: true, title: "" };
               }
             }}
           />

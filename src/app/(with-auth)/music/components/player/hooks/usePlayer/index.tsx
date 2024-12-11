@@ -11,7 +11,9 @@ export function usePlayer() {
 
   const { currentMusic, playerData, handleLoading, playing, setPlaying } = useMainContext();
   const { getData, setData } = useStorage();
-  const { getAudioSize, playAudio } = usePlayAudio();
+  // const { getAudioSize, playAudio } = usePlayAudio();
+  const { playAudio } = usePlayAudio();
+  const [state, setState] = useState("");
 
   const formatTime = (ms: number) => {
     const totalSeconds = Math.floor(ms / 1000);
@@ -21,7 +23,7 @@ export function usePlayer() {
   };
 
   const convert = async () => {
-    handleLoading(true);
+    // handleLoading(true);
     // setIsPlaying(false);
     const data = await ToMp3(currentMusic.link_youtube);
     if (data?.url) {
@@ -29,19 +31,20 @@ export function usePlayer() {
       const size = 0;
       playerData.current = { link_mp3: data.url, current_time: 0, max_time: size ?? 0, paused: true, title: currentMusic.title };
     }
-    handleLoading(false);
+    return data?.url;
+    // handleLoading(false);
   };
 
   const play = async () => {
     if (playerData.current.link_mp3) {
       setPlaying(!playing);
-      await playAudio(playerData.current.link_mp3);
+      await playAudio(playerData.current.link_mp3 ?? "");
     }
   };
 
-  // useEffect(() => {
-  // if (currentMusic.title) convert();
-  // }, [currentMusic.title]);
+  useEffect(() => {
+    if (currentMusic.title) convert();
+  }, [currentMusic.title]);
 
   return { currentMusic, playerData, play, playing };
 }
