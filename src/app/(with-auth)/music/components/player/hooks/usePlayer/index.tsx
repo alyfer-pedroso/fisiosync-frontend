@@ -2,18 +2,18 @@ import { useCallback, useEffect, useState } from "react";
 import { useFocusEffect, useRouter } from "expo-router";
 
 import { Music } from "@/data/services";
-import { useMainContext, useStorage, usePlayAudio } from "@/data/hooks";
+import { useMainContext, useStorage, usePlayAudio, useMetronome } from "@/data/hooks";
 
 export function usePlayer() {
   const router = useRouter();
 
   const { ToMp3 } = Music();
 
-  const { currentMusic, playerData, handleLoading, playing, setPlaying } = useMainContext();
+  const { currentMusic, playerData, handleLoading, playing, setPlaying, withBpm, setWithBpm } = useMainContext();
   const { getData, setData } = useStorage();
   // const { getAudioSize, playAudio } = usePlayAudio();
   const { playAudio } = usePlayAudio();
-  const [state, setState] = useState("");
+  const { toggleMetronome, isPlaying, stopMetronome } = useMetronome(currentMusic.bpm);
 
   const formatTime = (ms: number) => {
     const totalSeconds = Math.floor(ms / 1000);
@@ -38,13 +38,22 @@ export function usePlayer() {
   const play = async () => {
     if (playerData.current.link_mp3) {
       setPlaying(!playing);
-      await playAudio(playerData.current.link_mp3 ?? "");
+      await playAudio(playerData.current.link_mp3 ?? "").then(() => {
+        if (withBpm) toggleMetronome();
+        else {
+          if (isPlaying) stopMetronome();
+        }
+      });
     }
+  };
+
+  const handleBpm = () => {
+    setWithBpm(!withBpm);
   };
 
   useEffect(() => {
     if (currentMusic.title) convert();
   }, [currentMusic.title]);
 
-  return { currentMusic, playerData, play, playing };
+  return { currentMusic, playerData, play, playing, handleBpm, withBpm };
 }

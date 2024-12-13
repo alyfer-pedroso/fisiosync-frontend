@@ -17,4 +17,6 @@ export interface IMainContext {
   playerData: MutableRefObject<PlayerModel.IPlayer>;
   playing: boolean;
   setPlaying: (value: boolean) => void;
+  withBpm: boolean;
+  setWithBpm: (value: boolean) => void;
 }
