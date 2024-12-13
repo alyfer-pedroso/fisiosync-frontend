@@ -1,10 +1,10 @@
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, ActivityIndicator } from "react-native";
 import { Page, Input, Button } from "@/components/template";
 
 import * as Models from "../../model";
 
 export function ViewUser({ ...props }: Models.IUserHook) {
-  const { changeState, userData, logOut } = props;
+  const { changeState, userData, logOut, categories } = props;
 
   return (
     <Page className="w-full flex-1">
@@ -41,38 +41,30 @@ export function ViewUser({ ...props }: Models.IUserHook) {
       </View>
       <View className="w-[90%] mx-auto mt-6">
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 8, gap: 8 }}>
-          {["Pop", "Rock", "Trap", "Jazz", "Clássica", "R&B"].map((item, index) => (
-            <View
-              key={index}
-              className={`w-[80px] h-[50px] rounded-lg flex items-center justify-center ${index === 2 ? "bg-[#1F4BFC]" : "bg-[#EDEDED]"}`}
-            >
-              <Text
-                style={{
-                  color: index === 2 ? "#FFF" : "#000",
-                  fontWeight: index === 2 ? "bold" : "normal",
-                }}
-              >
-                {item}
-              </Text>
+          {categories?.length == 0 ? (
+            <View className="w-full items-center">
+              <ActivityIndicator size={"large"} />
             </View>
-          ))}
+          ) : (
+            categories.map((item, index) => (
+              <View key={index} className={`w-[80px] h-[50px] rounded-lg flex items-center justify-center bg-[#EDEDED]`}>
+                <Text className="font-inter-bold ">{item.name}</Text>
+              </View>
+            ))
+          )}
         </ScrollView>
       </View>
 
       <View className="border-b w-[90%] mx-auto p-7" style={{ opacity: 0.2 }}></View>
 
       <View className="w-[90%] flex-row justfy-around items-center mt-5 gap-2 mx-auto">
-        <View className="gap-5 p-2.5">
-          <Button
-            text="Alterar dados"
-            className="w-[140px] h-[50px] flex items-center justify-center text-center"
-            onPress={() => changeState("view")}
-          />
-          <Button text="Sair" className="w-[140px] h-[50px] flex items-center justify-center text-center bg-[#0D006F]" onPress={logOut} />
+        <View className="w-full gap-5 p-2.5 items-center">
+          <Button text="Alterar dados" className=" h-[50px] flex items-center justify-center text-center" onPress={() => changeState("view")} />
+          <Button text="Sair" className=" h-[50px] flex items-center justify-center text-center bg-[#0D006F]" onPress={logOut} />
         </View>
-        <View className="w-[50%] h-[120px] bg-[#EDEDED] rounded-lg flex items-center justify-center">
+        {/* <View className="w-[50%] h-[120px] bg-[#EDEDED] rounded-lg flex items-center justify-center">
           <Text className="text-[40px] font-inter-regular text-center">90 bpm</Text>
-        </View>
+        </View> */}
       </View>
     </Page>
   );

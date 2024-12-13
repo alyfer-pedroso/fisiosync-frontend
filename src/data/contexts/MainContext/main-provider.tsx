@@ -25,6 +25,7 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
   const [appState, setAppState] = useState<MainContextModel.TAppState>("search");
   const [currentMusic, setCurrentMusic] = useState<MusicModel.IMusic>(initialMusic);
   const [playing, setPlaying] = useState(false);
+  const [withBpm, setWithBpm] = useState(false);
 
   const { clearAudio, playAudio } = usePlayAudio();
 
@@ -117,6 +118,8 @@ export function MainProvider({ children }: { children: React.ReactNode }) {
         playerData,
         playing,
         setPlaying,
+        withBpm,
+        setWithBpm,
       }}
     >
       {fontsLoaded && <Toast ref={toastRef} />}
